@@ -7,23 +7,28 @@ var path = require('path');
 
 
 app.get('/yourroute', function(req, res) {
-  res.send("stuff");
+  res.send("prestige worldwide worldwide");
 });
 
-app.post('/create/:name/:age', function(req, res) {
+ app.post('/create/:name/:age', function(req, res) {
+
   let obj = {
     "name": req.params.name,
-    "age": req.params.age
+    "age": req.params.age,
+
   }
 
   fs.readFile('./storage.json', 'utf8', function(err, data) {
     if (err) {
       throw err;
     }
+
     data = JSON.parse(data);
     console.log("prestige worldwide");
     data.push(obj);
-
+    let userId = data.length
+    data[userId-1].id = userId;
+     //create dynamic id
     fs.writeFile('./storage.json', JSON.stringify(data), function(err) {
       if (err) {
         throw err;
